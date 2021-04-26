@@ -58,6 +58,8 @@ int main(int argc, char** argv) {
     
     bool verbosity = true; // SET VERBOSITY
 
+    // Input filestream
+
 
 
     std::vector<int> scoreBoard = {0, 0, 0}; // [0] os tie, [1] is loss, [2] is win
