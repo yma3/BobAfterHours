@@ -1,24 +1,164 @@
 {
-    "1000": "Alley Cat",
-    "10000": "Tabby Cat",
-    "1001": "Scavenging Hyena",
-    "1002": "Fiendish Servant",
-    "1003": "Vulgar Homunculus",
-    "1004": "Wrath Weaver",
-    "1005": "Dragonspawn Lieutenant",
-    "1006": "Red Whelp",
-    "1007": "Refreshing Anomaly",
-    "1008": "Sellemental",
-    "10009": "Water Droplet",
-    "1009": "Micro Machine",
-    "1010": "Micro Mummy",
-    "1011": "Murloc Tidehunter",
-    "10011": "Murloc Scout",
-    "1012": "Murloc Tidecaller",
-    "1013": "Rockpool Hunter",
-    "1014": "Deck Swabbie",
-    "1015": "Scallywag",
-    "10015": "Sky Pirate",
-    "1016": "Acolyte of C'Thun",
-    "10016": "Acolyte of C'Thun"
+    "1000": {
+        "name":"Alley Cat",
+        "tribe": "Beast",
+        "atk": 1,
+        "hp": 1,
+        "tier":1
+    },
+    "10000": {
+        "name":"Tabby Cat",
+        "tribe": "Beast",
+        "atk": 1,
+        "hp": 1,
+        "tier":1
+    },
+    "1001": {
+        "name":"Scavenging Hyena",
+        "tribe": "Beast",
+        "atk": 2,
+        "hp": 1,
+        "tier":1
+    },
+    "1002": {
+        "name":"Fiendish Servant",
+        "tribe": "Demon",
+        "atk": 2,
+        "hp": 1,
+        "tier":1
+    },
+    "1003": {
+        "name":"Vulgar Homunculus",
+        "tribe": "Demon",
+        "atk": 2,
+        "hp": 4,
+        "tier":1
+    },
+    "1004": {
+        "name":"Wrath Weaver",
+        "tribe": "Neutral",
+        "atk": 1,
+        "hp": 3,
+        "tier":1
+    },
+    "1005": {
+        "name":"Dragonspawn Lieutenant",
+        "tribe": "Dragon",
+        "atk": 2,
+        "hp": 3,
+        "tier":1
+    },
+    "1006": {
+        "name":"Red Whelp",
+        "tribe": "Dragon",
+        "atk": 1,
+        "hp": 2,
+        "tier":1
+    },
+    "1007": {
+        "name":"Refreshing Anomaly",
+        "tribe": "Elemental",
+        "atk": 1,
+        "hp": 3,
+        "tier":1
+    },
+    "1008": {
+        "name":"Sellemental",
+        "tribe": "Elemental",
+        "atk": 2,
+        "hp": 2,
+        "tier":1
+    },
+    "10009": {
+        "name":"Water Droplet",
+        "tribe": "Elemental",
+        "atk": 2,
+        "hp": 2,
+        "tier":1
+    },
+    "1009": {
+        "name":"Micro Machine",
+        "tribe": "Mech",
+        "atk": 1,
+        "hp": 2,
+        "tier":1
+    },
+    "1010": {
+        "name":"Micro Mummy",
+        "tribe": "Mech",
+        "atk": 1,
+        "hp": 2,
+        "tier":1
+    },
+    "1011": {
+        "name":"Murloc Tidehunter",
+        "tribe": "Murloc",
+        "atk": 2,
+        "hp": 1,
+        "tier":1
+    },
+    "10011": {
+        "name":"Murloc Scout",
+        "tribe": "Murloc",
+        "atk": 1,
+        "hp": 1,
+        "tier":1
+    },
+    "1012": {
+        "name":"Murloc Tidecaller",
+        "tribe": "Murloc",
+        "atk": 1,
+        "hp": 2,
+        "tier":1
+    },
+    "1013": {
+        "name":"Rockpool Hunter",
+        "tribe": "Murloc",
+        "atk": 2,
+        "hp": 3,
+        "tier":1
+    },
+    "1014": {
+        "name":"Deck Swabbie",
+        "tribe": "Pirate",
+        "atk": 2,
+        "hp": 2,
+        "tier":1
+    },
+    "1015": {
+        "name":"Scallywag",
+        "tribe": "Pirate",
+        "atk": 2,
+        "hp": 1,
+        "tier":1
+    },
+    "10015": {
+        "name":"Sky Pirate",
+        "tribe": "Pirate",
+        "atk": 1,
+        "hp": 1,
+        "tier":1
+    },
+    "1016": {
+        "name":"Acolyte of C'Thun",
+        "tribe": "Neutral",
+        "atk": 2,
+        "hp": 2,
+        "tier":1
+    },
+    "10016": {
+        "name":"Acolyte of C'Thun",
+        "tribe": "Neutral",
+        "atk": 2,
+        "hp": 2,
+        "tier":1
+    },
+
+    "2000": {
+        "name":"Spawn of N'Zoth",
+        "tribe": "Neutral",
+        "atk": 2,
+        "hp": 2,
+        "tier":2
+    }
 }

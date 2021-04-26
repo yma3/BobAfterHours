@@ -133,6 +133,10 @@ void Board::checkDeaths() {
     }
 }
 
+
+// ++++++++++++++++++++++++++ DEATHRATTLE CODE ++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 void Board::doDeathrattle(Minion &minion, int idx) {
     std::vector<Minion> *affectedBoard;
     affectedBoard = (minion.IsPlayerMinion()) ? &playerBoard : &enemyBoard;
@@ -164,6 +168,9 @@ void Board::doDeathrattle(Minion &minion, int idx) {
     }
 }
 
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 // ====== Check Win ======
 
 bool Board::checkWin() {
@@ -173,7 +180,7 @@ bool Board::checkWin() {
 
 // ====== Turn Code ======
 
-std::pair<Minion, Minion> Board::doTurn() {
+void Board::doTurn() {
     std::vector<Minion> *attackerBoard;
     std::vector<Minion> *defenderBoard;
     if (isPlayerTurn) {
@@ -209,6 +216,7 @@ std::pair<Minion, Minion> Board::doTurn() {
     std::pair<Minion, Minion> atk_def_pair = std::make_pair(*attacker, *defender);
 
     doAttack(*attacker, *defender);
+    fightHistory.push_back(atk_def_pair);
     // printBoard();
 
     checkDeaths();
@@ -219,9 +227,32 @@ std::pair<Minion, Minion> Board::doTurn() {
     if (isVerbose) {printBoard();}
 
     isPlayerTurn = !isPlayerTurn;
+}
 
-    return atk_def_pair;
+void Board::singleSim(std::vector<int> &scoreBoard) {
+    int turnCounter = 1;
+    setRandomAttacker();
+    while(!checkWin()) {
+        doTurn();
+        std::cout << "====== Turn: " << turnCounter << ", Attacker: " << getWhoseTurn() << " ======" << std::endl;
+        turnCounter++;
+    }
+
+    if (playerBoard.empty() && enemyBoard.empty()) {
+        scoreBoard[0] += 1;
+        // std::cout << "It's a tie!" << std::endl;
+    } else if (playerBoard.empty() && !enemyBoard.empty()) {
+        // std::cout << "Player Loses!" << std::endl;
+        scoreBoard[1] += 1;
+    } else { // (!board.playerBoard.empty() && board.enemyBoard.empty()) {
+        // std::cout << "Player Wins!" << std::endl;
+        scoreBoard[2] += 1;
+    }
     
+
+    // for (auto it = begin(fightHistory); it != end(fightHistory); ++it) {
+    //     std::cout << (*it).first.toString() << " attacks " << (*it).second.toString() << std::endl;
+    // }
 }
 
 bool Board::getWhoseTurn() {return isPlayerTurn;}

@@ -15,31 +15,31 @@ std::vector<std::tuple<std::string, int, int>> MinionList = {
     std::make_tuple("Tabby Cat", 1, 1)
 };
 
-void singleSim(Board &board, std::vector<int> &scoreBoard) {
-    int turnCounter = 1;
-    std::vector< std::pair<Minion, Minion> > fightHistory;
-    board.setRandomAttacker();
-    while(!board.checkWin()) {
-        // std::cout << "====== Turn: " << turnCounter << ", Attacker: " << board.getWhoseTurn() << " ======" << std::endl;
-        fightHistory.push_back(board.doTurn());
-        turnCounter++;
-    }
+// void singleSim(Board &board, std::vector<int> &scoreBoard) {
+//     int turnCounter = 1;
+//     std::vector< std::pair<Minion, Minion> > fightHistory;
+//     board.setRandomAttacker();
+//     while(!board.checkWin()) {
+//         // std::cout << "====== Turn: " << turnCounter << ", Attacker: " << board.getWhoseTurn() << " ======" << std::endl;
+//         fightHistory.push_back(board.doTurn());
+//         turnCounter++;
+//     }
 
-    if (board.playerBoard.empty() && board.enemyBoard.empty()) {
-        scoreBoard[0] += 1;
-        // std::cout << "It's a tie!" << std::endl;
-    } else if (board.playerBoard.empty() && !board.enemyBoard.empty()) {
-        // std::cout << "Player Loses!" << std::endl;
-        scoreBoard[1] += 1;
-    } else { // (!board.playerBoard.empty() && board.enemyBoard.empty()) {
-        // std::cout << "Player Wins!" << std::endl;
-        scoreBoard[2] += 1;
-    }
+//     if (board.playerBoard.empty() && board.enemyBoard.empty()) {
+//         scoreBoard[0] += 1;
+//         // std::cout << "It's a tie!" << std::endl;
+//     } else if (board.playerBoard.empty() && !board.enemyBoard.empty()) {
+//         // std::cout << "Player Loses!" << std::endl;
+//         scoreBoard[1] += 1;
+//     } else { // (!board.playerBoard.empty() && board.enemyBoard.empty()) {
+//         // std::cout << "Player Wins!" << std::endl;
+//         scoreBoard[2] += 1;
+//     }
 
-    // for (auto it = begin(fightHistory); it != end(fightHistory); ++it) {
-    //     std::cout << (*it).first.toString() << " attacks " << (*it).second.toString() << std::endl;
-    // }
-}
+//     // for (auto it = begin(fightHistory); it != end(fightHistory); ++it) {
+//     //     std::cout << (*it).first.toString() << " attacks " << (*it).second.toString() << std::endl;
+//     // }
+// }
 
 
 
@@ -66,8 +66,10 @@ int main(int argc, char** argv) {
 
     // Testing Input Files JSON
     // for (auto &element : minionNameList) {
-    //     std::cout << element << std::endl;
+    //     std::cout << element.at("name") << std::endl;
     // }
+
+    // std::cout << minionNameList["1000"].at("name") << std::endl;
 
 
 
@@ -102,7 +104,7 @@ int main(int argc, char** argv) {
         testBoard.setPlayerBoard(test_playerMins);
         testBoard.setEnemyBoard(test_enemyMins);
 
-        singleSim(testBoard, scoreBoard);
+        testBoard.singleSim(scoreBoard);
     }
 
 

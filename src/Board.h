@@ -19,19 +19,22 @@ class Board{
         void doAttack(Minion &attacker, Minion &defender);
         Minion& getAttacker(std::vector<Minion> &minionBoard);
         Minion& getDefender(std::vector<Minion> &minionBoard);
-        std::pair<Minion, Minion> doTurn();
+        void doTurn();
 
         void checkDeaths();
         void doDeathrattle(Minion &minion, int idx);
 
         bool checkWin();
 
-        // void simBoard(int n);
+        void singleSim(std::vector<int> &scoreBoard);
 
         bool getWhoseTurn();
 
         std::vector<Minion> playerBoard;
         std::vector<Minion> enemyBoard;
+
+        std::vector< std::pair<Minion, Minion> > fightHistory;
+
         bool isPlayerTurn;
         int turnCounter;
         
