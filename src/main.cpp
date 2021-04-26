@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <string>
 #include <tuple>
@@ -56,9 +57,17 @@ int main(int argc, char** argv) {
         EPS = 10; // Set default episodes for simulation
     }
     
-    bool verbosity = true; // SET VERBOSITY
+    bool verbosity = false; // SET VERBOSITY
 
     // Input filestream
+    std::ifstream i("minions.json");
+    json minionNameList;
+    i >> minionNameList;
+
+    // Testing Input Files JSON
+    // for (auto &element : minionNameList) {
+    //     std::cout << element << std::endl;
+    // }
 
 
 
