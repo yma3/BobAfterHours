@@ -12,7 +12,7 @@ class Board{
 
         void setPlayerBoard(std::vector<Minion> minionBoard);
         void setEnemyBoard(std::vector<Minion> minionBoard);
-        void setRandomAttacker();
+        void setAttacker();
         int getDistFromRange(int start, int end);
         void printBoard();
 

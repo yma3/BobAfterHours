@@ -41,6 +41,18 @@ std::vector<std::tuple<std::string, int, int>> MinionList = {
 //     // }
 // }
 
+void updateMinionData(std::vector<Minion> &minionList, json &j) {
+    for (auto it = begin(minionList); it != end(minionList); ++it) {
+        std::string miniontype = std::to_string(it->GetMinionType());
+        // std::cout <<  miniontype << " | " << j[miniontype].at("isTaunt") << std::endl;
+        it->SetTribe( j[ miniontype ].at("tribe") );
+        it->SetTaunt( (j[miniontype].at("isTaunt") == 1) );
+        it->SetDivine( (j[miniontype].at("isDivine") == 1) );
+        it->SetPoison( (j[miniontype].at("isPoison") == 1) );
+
+        // std::cout << it->toString() << std::endl;
+    }
+}
 
 
 
@@ -54,7 +66,7 @@ int main(int argc, char** argv) {
         EPS = std::stoi(argv[1]);
     }
     else {
-        EPS = 10; // Set default episodes for simulation
+        EPS = 1; // Set default episodes for simulation
     }
     
     bool verbosity = false; // SET VERBOSITY
@@ -84,8 +96,11 @@ int main(int argc, char** argv) {
     // }
 
     // Testing Board Stuff
-    std::vector<Minion> test_playerMins {Minion(1000, 2, 2), Minion(1001, 2, 2)};
-    std::vector<Minion> test_enemyMins {Minion(2001, 2, 2, 0), Minion(1004, 2, 2, 0)}; 
+    std::vector<Minion> test_playerMins {Minion(1000, 1, 1), Minion(10000, 1, 1), Minion(1001, 2, 2), Minion(1002, 1, 2)};
+    std::vector<Minion> test_enemyMins {Minion(2000, 2, 2, 0), Minion(1016, 2, 2, 0)}; 
+
+    updateMinionData(test_playerMins, minionNameList);
+    updateMinionData(test_enemyMins, minionNameList);
 
     Board testBoard(test_playerMins, test_enemyMins);
     testBoard.isVerbose = verbosity; // SETTING THE VERBOSITY

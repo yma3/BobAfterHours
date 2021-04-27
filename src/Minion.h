@@ -12,11 +12,17 @@ class Minion {
         void SetATK(int atk);
         void SetAtkState(bool atkd);
         void SetTaunt(bool taunt);
+        void SetTribe(std::string trb);
+        void SetDivine(bool divine);
+        void SetPoison(bool poison);
         int GetHP();
         int GetATK();
         bool GetAtkState();
         bool GetTaunt();
         int GetMinionType();
+        std::string GetTribe();
+        bool GetDivine();
+        bool GetPoison();
         bool IsPlayerMinion();
         
         void IncreaseHP(int deltaHP);
@@ -28,6 +34,7 @@ class Minion {
         int minionType;
         int health;
         int attack;
+        std::string tribe;
         bool isDivine;
         bool isPoison;
         bool isTaunt;

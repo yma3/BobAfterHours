@@ -4,154 +4,220 @@
         "tribe": "Beast",
         "atk": 1,
         "hp": 1,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "10000": {
         "name":"Tabby Cat",
         "tribe": "Beast",
         "atk": 1,
         "hp": 1,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "1001": {
         "name":"Scavenging Hyena",
         "tribe": "Beast",
         "atk": 2,
         "hp": 1,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "1002": {
         "name":"Fiendish Servant",
         "tribe": "Demon",
         "atk": 2,
         "hp": 1,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "1003": {
         "name":"Vulgar Homunculus",
         "tribe": "Demon",
         "atk": 2,
         "hp": 4,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "1004": {
         "name":"Wrath Weaver",
         "tribe": "Neutral",
         "atk": 1,
         "hp": 3,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "1005": {
         "name":"Dragonspawn Lieutenant",
         "tribe": "Dragon",
         "atk": 2,
         "hp": 3,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "1006": {
         "name":"Red Whelp",
         "tribe": "Dragon",
         "atk": 1,
         "hp": 2,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "1007": {
         "name":"Refreshing Anomaly",
         "tribe": "Elemental",
         "atk": 1,
         "hp": 3,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "1008": {
         "name":"Sellemental",
         "tribe": "Elemental",
         "atk": 2,
         "hp": 2,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "10009": {
         "name":"Water Droplet",
         "tribe": "Elemental",
         "atk": 2,
         "hp": 2,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "1009": {
         "name":"Micro Machine",
         "tribe": "Mech",
         "atk": 1,
         "hp": 2,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "1010": {
         "name":"Micro Mummy",
         "tribe": "Mech",
         "atk": 1,
         "hp": 2,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "1011": {
         "name":"Murloc Tidehunter",
         "tribe": "Murloc",
         "atk": 2,
         "hp": 1,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "10011": {
         "name":"Murloc Scout",
         "tribe": "Murloc",
         "atk": 1,
         "hp": 1,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "1012": {
         "name":"Murloc Tidecaller",
         "tribe": "Murloc",
         "atk": 1,
         "hp": 2,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "1013": {
         "name":"Rockpool Hunter",
         "tribe": "Murloc",
         "atk": 2,
         "hp": 3,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "1014": {
         "name":"Deck Swabbie",
         "tribe": "Pirate",
         "atk": 2,
         "hp": 2,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "1015": {
         "name":"Scallywag",
         "tribe": "Pirate",
         "atk": 2,
         "hp": 1,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "10015": {
         "name":"Sky Pirate",
         "tribe": "Pirate",
         "atk": 1,
         "hp": 1,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     },
     "1016": {
         "name":"Acolyte of C'Thun",
         "tribe": "Neutral",
         "atk": 2,
         "hp": 2,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 1
     },
     "10016": {
         "name":"Acolyte of C'Thun",
         "tribe": "Neutral",
         "atk": 2,
         "hp": 2,
-        "tier":1
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 1
     },
 
     "2000": {
@@ -159,6 +225,9 @@
         "tribe": "Neutral",
         "atk": 2,
         "hp": 2,
-        "tier":2
+        "tier":2,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0
     }
 }

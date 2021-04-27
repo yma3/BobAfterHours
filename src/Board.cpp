@@ -9,26 +9,36 @@
 Board::Board(std::vector<Minion> pBoard, std::vector<Minion> eBoard) {
     seed = static_cast<int> (std::chrono::system_clock::now().time_since_epoch().count());
     generator.seed(seed);
-    isPlayerTurn = getDistFromRange(0,1);
-    std::cout << isPlayerTurn << std::endl;
     setPlayerBoard(pBoard);
     setEnemyBoard(eBoard);
+    setAttacker();
+    std::cout << isPlayerTurn << std::endl;
+
     isVerbose = false;
 }
 
 Board::Board(std::vector<Minion> pBoard, std::vector<Minion> eBoard, bool verbose) {
     seed = static_cast<int> (std::chrono::system_clock::now().time_since_epoch().count());
     generator.seed(seed);
-    isPlayerTurn = getDistFromRange(0,1);
-    std::cout << isPlayerTurn << std::endl;
     setPlayerBoard(pBoard);
     setEnemyBoard(eBoard);
+    setAttacker();
+    std::cout << isPlayerTurn << std::endl;
     isVerbose = verbose;
 }
 
 void Board::setPlayerBoard(std::vector<Minion> minionBoard) {playerBoard = minionBoard;}
 void Board::setEnemyBoard(std::vector<Minion> minionBoard) {enemyBoard = minionBoard;}
-void Board::setRandomAttacker() {isPlayerTurn = getDistFromRange(0,1);}
+void Board::setAttacker() {
+
+    if (playerBoard.size() > enemyBoard.size()) {
+        isPlayerTurn = 1;
+    } else if (playerBoard.size() < enemyBoard.size()) {
+        isPlayerTurn = 0;
+    } else {
+        isPlayerTurn = getDistFromRange(0, 1);
+    }
+}
 int Board::getDistFromRange(int start, int end) {std::uniform_int_distribution<int> distr(start, end); return distr(generator);}
 void Board::printBoard() {
     std::cout << "========== PRINT BOARD ==========" << std::endl;
@@ -141,19 +151,42 @@ void Board::doDeathrattle(Minion &minion, int idx) {
     std::vector<Minion> *affectedBoard;
     affectedBoard = (minion.IsPlayerMinion()) ? &playerBoard : &enemyBoard;
 
+    // Generic Tribe Deaths
+    if (minion.GetTribe().compare("Beast") == 0) {
+        for (auto it = begin(*affectedBoard); it != end(*affectedBoard); ++it) {
+            if (it->GetMinionType() == 1001) { // if it's a scavenging hyena
+                // std::cout << "BUFFING HYENA" << std::endl;
+                it->IncreaseATK(2);
+                it->IncreaseHP(1);
+            }
+        }
+    }
 
+
+    // Specific Deathrattles
     switch(minion.GetMinionType()) {
+        case 1002: // Fiendish Servant
+            {
+                int buffIdx = getDistFromRange(0, affectedBoard->size());
+                if(isVerbose) {std::cout << "DEATHRATTLE: Fiendish Servant" << std::endl;}
+                while (buffIdx == idx) {
+                    buffIdx = getDistFromRange(0, affectedBoard->size());
+                }
+                if(isVerbose) {std::cout << "BUFFING IDX: " << buffIdx << std::endl;}
+                (affectedBoard->begin() + buffIdx)->IncreaseATK(minion.GetATK());
+            }
+            break;
         case 1004: // Acolyte of C'Thun (2/2 Reborn)
             {
                 if (isVerbose) {std::cout << "DEATHRATTLE: Acolyte of C'Thun" << std::endl;}
-                Minion rebornMinion = Minion(10004, 1, 2); // 1004 is a token of the minion-type 4
+                Minion rebornMinion = Minion(10004, 1, 2); // 10094 is a token of the minion-type 1004
                 (*affectedBoard).insert((*affectedBoard).begin()+idx+1, rebornMinion);
                 // for (auto it = begin (*affectedBoard); it != end (*affectedBoard); ++it) {
                 //     std::cout << (*it).toString() << std::endl;
                 // }
             }
             break;
-        case 2001: // Spawn of N'Zoth (2/2, +2/+2)
+        case 2000: // Spawn of N'Zoth (2/2, +2/+2)
             {
                 if (isVerbose) {std::cout << "DEATHRATTLE: Spawn of N'Zoth" << std::endl;}
                 for (auto it = begin (*affectedBoard); it != end (*affectedBoard); ++it) {
@@ -231,10 +264,10 @@ void Board::doTurn() {
 
 void Board::singleSim(std::vector<int> &scoreBoard) {
     int turnCounter = 1;
-    setRandomAttacker();
+    setAttacker();
     while(!checkWin()) {
+        std::cout << "====== Turn: " << turnCounter << ", Attacker: " << (getWhoseTurn() ? "Player" : "Enemy") << " ======" << std::endl;
         doTurn();
-        std::cout << "====== Turn: " << turnCounter << ", Attacker: " << getWhoseTurn() << " ======" << std::endl;
         turnCounter++;
     }
 
@@ -248,11 +281,11 @@ void Board::singleSim(std::vector<int> &scoreBoard) {
         // std::cout << "Player Wins!" << std::endl;
         scoreBoard[2] += 1;
     }
-    
 
-    // for (auto it = begin(fightHistory); it != end(fightHistory); ++it) {
-    //     std::cout << (*it).first.toString() << " attacks " << (*it).second.toString() << std::endl;
-    // }
+
+    for (auto it = begin(fightHistory); it != end(fightHistory); ++it) {
+        std::cout << (*it).first.toString() << " attacks " << (*it).second.toString() << std::endl;
+    }
 }
 
 bool Board::getWhoseTurn() {return isPlayerTurn;}
