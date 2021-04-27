@@ -49,7 +49,8 @@ void updateMinionData(std::vector<Minion> &minionList, json &j) {
         it->SetTaunt( (j[miniontype].at("isTaunt") == 1) );
         it->SetDivine( (j[miniontype].at("isDivine") == 1) );
         it->SetPoison( (j[miniontype].at("isPoison") == 1) );
-
+        it->SetDeathrattle( (j[miniontype].at("isDeathrattle") == 1) );
+        it->SetReborn( (j[miniontype].at("isReborn") == 1) );
         // std::cout << it->toString() << std::endl;
     }
 }
@@ -62,14 +63,18 @@ void updateMinionData(std::vector<Minion> &minionList, json &j) {
 int main(int argc, char** argv) {
 
     int EPS;
+    bool verbosity = false; // SET VERBOSITY
+
     if (argc == 2) {
         EPS = std::stoi(argv[1]);
-    }
-    else {
+    } else if (argc==3) {
+        EPS = std::stoi(argv[1]);
+        verbosity = (std::stoi(argv[2])==1);
+    } else {
         EPS = 1; // Set default episodes for simulation
     }
     
-    bool verbosity = false; // SET VERBOSITY
+    std::cout << "Eps: " << EPS << " Verbose: " << verbosity << std::endl;
 
     // Input filestream
     std::ifstream i("minions.json");
@@ -96,8 +101,12 @@ int main(int argc, char** argv) {
     // }
 
     // Testing Board Stuff
-    std::vector<Minion> test_playerMins {Minion(1000, 1, 1), Minion(10000, 1, 1), Minion(1001, 2, 2), Minion(1002, 1, 2)};
-    std::vector<Minion> test_enemyMins {Minion(2000, 2, 2, 0), Minion(1016, 2, 2, 0)}; 
+    // std::vector<Minion> test_playerMins {Minion(1000, 1, 1), Minion(10000, 1, 1), Minion(1001, 2, 2), Minion(1002, 1, 2)};
+    // std::vector<Minion> test_enemyMins {Minion(2000, 2, 2, 0), Minion(1016, 2, 2, 0)}; 
+
+    std::vector<Minion> test_playerMins {Minion(1001, 1, 2), Minion(1001, 1, 2), Minion(1000, 10, 1)};
+    std::vector<Minion> test_enemyMins {Minion(1016, 2, 2, 0)}; 
+
 
     updateMinionData(test_playerMins, minionNameList);
     updateMinionData(test_enemyMins, minionNameList);

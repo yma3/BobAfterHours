@@ -7,7 +7,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "10000": {
         "name":"Tabby Cat",
@@ -17,7 +19,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "1001": {
         "name":"Scavenging Hyena",
@@ -27,7 +31,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "1002": {
         "name":"Fiendish Servant",
@@ -37,7 +43,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "1003": {
         "name":"Vulgar Homunculus",
@@ -47,7 +55,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "1004": {
         "name":"Wrath Weaver",
@@ -57,7 +67,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "1005": {
         "name":"Dragonspawn Lieutenant",
@@ -67,7 +79,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "1006": {
         "name":"Red Whelp",
@@ -77,7 +91,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "1007": {
         "name":"Refreshing Anomaly",
@@ -87,7 +103,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "1008": {
         "name":"Sellemental",
@@ -97,7 +115,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "10009": {
         "name":"Water Droplet",
@@ -107,7 +127,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "1009": {
         "name":"Micro Machine",
@@ -117,7 +139,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "1010": {
         "name":"Micro Mummy",
@@ -127,7 +151,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 1,
+        "isDeathrattle":0
     },
     "1011": {
         "name":"Murloc Tidehunter",
@@ -137,7 +163,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "10011": {
         "name":"Murloc Scout",
@@ -147,7 +175,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "1012": {
         "name":"Murloc Tidecaller",
@@ -157,7 +187,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "1013": {
         "name":"Rockpool Hunter",
@@ -167,7 +199,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "1014": {
         "name":"Deck Swabbie",
@@ -177,7 +211,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "1015": {
         "name":"Scallywag",
@@ -187,7 +223,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":1
     },
     "10015": {
         "name":"Sky Pirate",
@@ -197,7 +235,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "1016": {
         "name":"Acolyte of C'Thun",
@@ -207,7 +247,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 1
+        "isTaunt": 1,
+        "isReborn": 1,
+        "isDeathrattle":0
     },
     "10016": {
         "name":"Acolyte of C'Thun",
@@ -217,7 +259,9 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 1
+        "isTaunt": 1,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
 
     "2000": {
@@ -228,6 +272,8 @@
         "tier":2,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":1
     }
 }

@@ -15,6 +15,8 @@ class Minion {
         void SetTribe(std::string trb);
         void SetDivine(bool divine);
         void SetPoison(bool poison);
+        void SetDeathrattle(bool deathrattle);
+        void SetReborn(bool reborn);
         int GetHP();
         int GetATK();
         bool GetAtkState();
@@ -23,6 +25,8 @@ class Minion {
         std::string GetTribe();
         bool GetDivine();
         bool GetPoison();
+        bool GetDeathrattle();
+        bool GetReborn();
         bool IsPlayerMinion();
         
         void IncreaseHP(int deltaHP);
@@ -39,6 +43,8 @@ class Minion {
         bool isPoison;
         bool isTaunt;
         bool attacked;
+        bool isDeathrattle;
+        bool isReborn;
 
         bool isPlayerMinion; // contains information on whose minion it belongs to
 

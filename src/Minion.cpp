@@ -21,6 +21,8 @@ Minion::Minion(int type, int hp, int atk) {
 
     isDivine = false;
     isPoison = false;
+    isDeathrattle = false;
+    isReborn = false;
     attacked = false;
     tribe = "Neutral";
 }
@@ -34,6 +36,8 @@ Minion::Minion(int type, int hp, int atk, bool whoseMin) { // Overloaded constru
 
     isDivine = false;
     isPoison = false;
+    isDeathrattle = false;
+    isReborn = false;
     attacked = false;
     tribe = "Neutral";
 }
@@ -45,7 +49,8 @@ void Minion::SetTaunt(bool taunt) {isTaunt = taunt;}
 void Minion::SetTribe(std::string trb) {tribe = trb;}
 void Minion::SetDivine(bool divine) {isDivine = divine;}
 void Minion::SetPoison(bool poison) {isPoison = poison;}
-
+void Minion::SetDeathrattle(bool deathrattle) {isDeathrattle = deathrattle;}
+void Minion::SetReborn(bool reborn) {isReborn = reborn;}
 
 int Minion::GetHP() {return health;}
 int Minion::GetATK() {return attack;}
@@ -55,6 +60,8 @@ int Minion::GetMinionType() {return minionType;}
 std::string Minion::GetTribe() {return tribe;}
 bool Minion::GetDivine() {return isDivine;}
 bool Minion::GetPoison() {return isPoison;}
+bool Minion::GetDeathrattle() {return isDeathrattle;}
+bool Minion::GetReborn() {return isReborn;}
 bool Minion::IsPlayerMinion() {return isPlayerMinion;}
 
 void Minion::IncreaseHP(int deltaHP) {SetHP(GetHP()+deltaHP);}

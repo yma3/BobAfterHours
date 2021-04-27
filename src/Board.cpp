@@ -71,14 +71,19 @@ Minion& Board::getAttacker(std::vector<Minion> &minionBoard) {
 Minion& Board::getDefender(std::vector<Minion> &minionBoard) {
     std::vector<int> valid;
     for (auto it = begin(minionBoard); it != end (minionBoard); ++it) {
-        if (it->GetTaunt()) {
+        if (it->GetTaunt() && (it->GetHP()>0)) {
             valid.push_back(it - begin(minionBoard));
         }
     }
     // std::cout << "Checked Taunts" << std::endl;
     if (valid.empty()) {
+        for (auto it = begin(minionBoard); it != end (minionBoard); ++it) {
+            if (it->GetHP()>0) {
+                valid.push_back(it - begin(minionBoard));
+            }
+        }
         // Choose randomly from the initial board
-        return minionBoard.at(getDistFromRange(0, minionBoard.size()-1));
+        return minionBoard.at(valid.at(getDistFromRange(0, valid.size()-1)));
     }
     else {
         // Choose from the valid list
@@ -90,9 +95,10 @@ Minion& Board::getDefender(std::vector<Minion> &minionBoard) {
 
 void Board::checkDeaths() {
     std::vector<std::pair<int, int>> deadMinionIdxVec;
+    int numDeathrattles = 0;
     if (isVerbose) {std::cout << "Checking Player Deaths" << std::endl;}
     for (auto it = begin (playerBoard); it != end (playerBoard);) {
-        if (it->GetHP() <= 0) {
+        if ((it->GetHP() <= 0) && it->GetDeathrattle()) {
             if (isVerbose) {std::cout << it->toString() << " IS DEAD" << std::endl;}
             deadMinionIdxVec.push_back(std::make_pair(0, it-playerBoard.begin()));
             it++;
@@ -100,12 +106,39 @@ void Board::checkDeaths() {
             // it = playerBoard.erase(it);
         } else {
             it++;
-        }
+        }       
+        if (it->GetDeathrattle()) {numDeathrattles++;}
     }
 
     if (isVerbose) {std::cout << "Checking Enemy Deaths" << std::endl;}
     for (auto it = begin (enemyBoard); it != end (enemyBoard);) {
-        if (it->GetHP() <= 0) {
+        if ((it->GetHP() <= 0) && it->GetDeathrattle()) {
+            if (isVerbose) {std::cout << it->toString() << " IS DEAD" << std::endl;}
+            deadMinionIdxVec.push_back(std::make_pair(1, it-enemyBoard.begin()));
+            it++;
+            // doDeathrattle(*it);
+            // it = enemyBoard.erase(it);
+        } else {
+            it++;
+        }
+        if (it->GetDeathrattle()) {numDeathrattles++;}
+    }
+
+    for (auto it = begin (playerBoard); it != end (playerBoard);) {
+        if ((it->GetHP() <= 0) && !it->GetDeathrattle()) {
+            if (isVerbose) {std::cout << it->toString() << " IS DEAD" << std::endl;}
+            deadMinionIdxVec.push_back(std::make_pair(0, it-playerBoard.begin()));
+            it++;
+            // doDeathrattle(*it);
+            // it = playerBoard.erase(it);
+        } else {
+            it++;
+        }       
+    }
+
+    if (isVerbose) {std::cout << "Checking Enemy Deaths" << std::endl;}
+    for (auto it = begin (enemyBoard); it != end (enemyBoard);) {
+        if ((it->GetHP() <= 0) && !it->GetDeathrattle()) {
             if (isVerbose) {std::cout << it->toString() << " IS DEAD" << std::endl;}
             deadMinionIdxVec.push_back(std::make_pair(1, it-enemyBoard.begin()));
             it++;
@@ -118,7 +151,7 @@ void Board::checkDeaths() {
 
     if (isVerbose) {std::cout << "Done Checking Deaths" << std::endl;}
 
-    std::shuffle(std::begin(deadMinionIdxVec), std::end(deadMinionIdxVec), std::default_random_engine());
+    std::shuffle(std::begin(deadMinionIdxVec), std::begin(deadMinionIdxVec)+numDeathrattles, std::default_random_engine());
 
     for (auto it = begin (deadMinionIdxVec); it != end (deadMinionIdxVec); ++it) {
         // if (isVerbose) {std::cout << (*it).first << "  " << (*it).second << std::endl;}
@@ -176,14 +209,34 @@ void Board::doDeathrattle(Minion &minion, int idx) {
                 (affectedBoard->begin() + buffIdx)->IncreaseATK(minion.GetATK());
             }
             break;
-        case 1004: // Acolyte of C'Thun (2/2 Reborn)
+        case 1016: // Acolyte of C'Thun (2/2 Reborn)
             {
                 if (isVerbose) {std::cout << "DEATHRATTLE: Acolyte of C'Thun" << std::endl;}
-                Minion rebornMinion = Minion(10004, 1, 2); // 10094 is a token of the minion-type 1004
+                Minion rebornMinion = Minion(10016, 1, 2); // 10094 is a token of the minion-type 1004
                 (*affectedBoard).insert((*affectedBoard).begin()+idx+1, rebornMinion);
                 // for (auto it = begin (*affectedBoard); it != end (*affectedBoard); ++it) {
                 //     std::cout << (*it).toString() << std::endl;
                 // }
+            }
+            break;
+        case 1015: // Scallywag
+            {
+                Minion skyPirate_Token = Minion(10015, 1, 1);
+                affectedBoard->insert(affectedBoard->begin()+idx+1, skyPirate_Token);
+                std::vector<Minion> *oppBoard = (!minion.IsPlayerMinion()) ? &playerBoard : &enemyBoard;
+                bool victFlag = true;
+                for(auto it=begin(*oppBoard); it!=end(*oppBoard); ++it) {
+                    if(it->GetHP()>0) {
+                        victFlag = false;
+                    }
+                }
+                std::cout << "Vict Flag: " << victFlag << std::endl;
+                if (!victFlag) {
+                    Minion tokdef = getDefender(*oppBoard);
+                    doAttack(*(affectedBoard->begin()+idx+1), tokdef);
+                    fightHistory.push_back(std::make_pair(*(affectedBoard->begin()+idx+1), tokdef));
+                    // checkDeaths();
+                }
             }
             break;
         case 2000: // Spawn of N'Zoth (2/2, +2/+2)
@@ -216,6 +269,8 @@ bool Board::checkWin() {
 void Board::doTurn() {
     std::vector<Minion> *attackerBoard;
     std::vector<Minion> *defenderBoard;
+    std::vector<std::pair<int, int>> deadMinionIdxVec; // Every turn there is an index of dead minions. We populate this then resolve
+
     if (isPlayerTurn) {
         attackerBoard = &playerBoard;
         defenderBoard = &enemyBoard;
