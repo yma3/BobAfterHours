@@ -34,6 +34,7 @@ class Board{
         std::vector<Minion> enemyBoard;
 
         std::vector< std::pair<Minion, Minion> > fightHistory;
+        std::vector<int> damageBreakdown;
 
         bool isPlayerTurn;
         int turnCounter;

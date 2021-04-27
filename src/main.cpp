@@ -51,6 +51,7 @@ void updateMinionData(std::vector<Minion> &minionList, json &j) {
         it->SetPoison( (j[miniontype].at("isPoison") == 1) );
         it->SetDeathrattle( (j[miniontype].at("isDeathrattle") == 1) );
         it->SetReborn( (j[miniontype].at("isReborn") == 1) );
+        it->tier =  j[miniontype].at("tier");
         // std::cout << it->toString() << std::endl;
     }
 }
@@ -104,8 +105,8 @@ int main(int argc, char** argv) {
     // std::vector<Minion> test_playerMins {Minion(1000, 1, 1), Minion(10000, 1, 1), Minion(1001, 2, 2), Minion(1002, 1, 2)};
     // std::vector<Minion> test_enemyMins {Minion(2000, 2, 2, 0), Minion(1016, 2, 2, 0)}; 
 
-    std::vector<Minion> test_playerMins {Minion(1010, 2, 1), Minion(1001, 1, 2), Minion(1000, 1, 1)};
-    std::vector<Minion> test_enemyMins {Minion(1016, 2, 2, 0)}; 
+    std::vector<Minion> test_playerMins {Minion(2000, 2, 2), Minion(1012, 3, 5), Minion(1013, 3, 2), Minion(1011, 1, 2), Minion(10011, 1, 1)};
+    std::vector<Minion> test_enemyMins {Minion(2000, 2, 2, 0), Minion(1000, 1, 1, 0), Minion(1008, 2, 2, 0), Minion(1016, 2, 2, 0), Minion(1016, 2, 2, 0)}; 
 
 
     updateMinionData(test_playerMins, minionNameList);
@@ -137,7 +138,11 @@ int main(int argc, char** argv) {
 
     // Print Scoreboard
     std::cout << "Ties: " << scoreBoard[0] << " Losses: " << scoreBoard[1] << " Wins: " << scoreBoard[2] << std::endl;
-
+    
+    int BOUNDS = 40;
+    for(int i = (0+BOUNDS); i < (testBoard.damageBreakdown.size()-BOUNDS); i++) {
+        std::cout << "Damage: " << (i-48) << " = " << testBoard.damageBreakdown[i] << std::endl;
+    }
 
 
     

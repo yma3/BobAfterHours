@@ -15,6 +15,10 @@ Board::Board(std::vector<Minion> pBoard, std::vector<Minion> eBoard) {
     std::cout << isPlayerTurn << std::endl;
 
     isVerbose = false;
+
+    for(int i = 0; i < 97; i++) {
+        damageBreakdown.push_back(0);
+    }
 }
 
 Board::Board(std::vector<Minion> pBoard, std::vector<Minion> eBoard, bool verbose) {
@@ -25,6 +29,9 @@ Board::Board(std::vector<Minion> pBoard, std::vector<Minion> eBoard, bool verbos
     setAttacker();
     std::cout << isPlayerTurn << std::endl;
     isVerbose = verbose;
+    for(int i = 0; i < 97; i++) {
+        damageBreakdown.push_back(0);
+    }
 }
 
 void Board::setPlayerBoard(std::vector<Minion> minionBoard) {playerBoard = minionBoard;}
@@ -72,13 +79,13 @@ Minion& Board::getDefender(std::vector<Minion> &minionBoard) {
     std::vector<int> valid;
     for (auto it = begin(minionBoard); it != end (minionBoard); ++it) {
         if (it->GetTaunt() && (it->GetHP()>0)) {
-            std::cout << it->toString() << std::endl;
+            // std::cout << it->toString() << std::endl;
             valid.push_back(it - begin(minionBoard));
         }
     }
     // std::cout << "Checked Taunts" << std::endl;
     if (valid.empty()) {
-        std::cout << "No Taunts Detected" << std::endl;
+        // std::cout << "No Taunts Detected" << std::endl;
         for (auto it = begin(minionBoard); it != end (minionBoard); ++it) {
             if (it->GetHP()>0) {
                 valid.push_back(it - begin(minionBoard));
@@ -88,7 +95,7 @@ Minion& Board::getDefender(std::vector<Minion> &minionBoard) {
         return minionBoard.at(valid.at(getDistFromRange(0, valid.size()-1)));
     }
     else {
-        std::cout << "Taunts Detected" << std::endl;
+        // std::cout << "Taunts Detected" << std::endl;
         // Choose from the valid list
         return minionBoard.at(valid.at(getDistFromRange(0, valid.size()-1)));
     }
@@ -332,26 +339,37 @@ void Board::singleSim(std::vector<int> &scoreBoard) {
     int turnCounter = 1;
     setAttacker();
     while(!checkWin()) {
-        std::cout << "====== Turn: " << turnCounter << ", Attacker: " << (getWhoseTurn() ? "Player" : "Enemy") << " ======" << std::endl;
+        // std::cout << "====== Turn: " << turnCounter << ", Attacker: " << (getWhoseTurn() ? "Player" : "Enemy") << " ======" << std::endl;
         doTurn();
         turnCounter++;
     }
 
     if (playerBoard.empty() && enemyBoard.empty()) {
         scoreBoard[0] += 1;
+        damageBreakdown[0+48] += 1;
         // std::cout << "It's a tie!" << std::endl;
     } else if (playerBoard.empty() && !enemyBoard.empty()) {
         // std::cout << "Player Loses!" << std::endl;
         scoreBoard[1] += 1;
+        int totaldamage = 0;
+        for (auto it = begin(enemyBoard); it != end(enemyBoard); ++it) {
+            totaldamage += it->tier;
+        }
+        damageBreakdown[48-totaldamage] += 1;
     } else { // (!board.playerBoard.empty() && board.enemyBoard.empty()) {
         // std::cout << "Player Wins!" << std::endl;
         scoreBoard[2] += 1;
+        int totaldamage = 0;
+        for (auto it = begin(playerBoard); it != end(playerBoard); ++it) {
+            totaldamage += it->tier;
+        }
+        damageBreakdown[48+totaldamage] += 1;
     }
 
 
-    for (auto it = begin(fightHistory); it != end(fightHistory); ++it) {
-        std::cout << (*it).first.toString() << " attacks " << (*it).second.toString() << std::endl;
-    }
+    // for (auto it = begin(fightHistory); it != end(fightHistory); ++it) {
+    //     std::cout << (*it).first.toString() << " attacks " << (*it).second.toString() << std::endl;
+    // }
 }
 
 bool Board::getWhoseTurn() {return isPlayerTurn;}

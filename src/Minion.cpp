@@ -26,6 +26,7 @@ Minion::Minion(int type, int hp, int atk) {
     isReborn = false;
     attacked = false;
     tribe = "Neutral";
+    tier = 1;
 }
 
 Minion::Minion(int type, int hp, int atk, bool whoseMin) { // Overloaded constructor to reference which character
@@ -42,6 +43,7 @@ Minion::Minion(int type, int hp, int atk, bool whoseMin) { // Overloaded constru
     isReborn = false;
     attacked = false;
     tribe = "Neutral";
+    tier = 1;
 }
 
 void Minion::SetHP(int hp) {health = hp;}

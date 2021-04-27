@@ -33,6 +33,7 @@ class Minion {
         void IncreaseATK(int deltaATK);
 
         std::string toString();
+        int tier;
 
     private:
         int minionType;
