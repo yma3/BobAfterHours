@@ -154,6 +154,18 @@
         "isTaunt": 0,
         "isReborn": 1,
         "isDeathrattle":0
+    },    
+    "10010": {
+        "name":"Micro Mummy",
+        "tribe": "Mech",
+        "atk": 1,
+        "hp": 1,
+        "tier":1,
+        "isDivine": 0,
+        "isPoison": 0,
+        "isTaunt": 0,
+        "isReborn": 0,
+        "isDeathrattle":0
     },
     "1011": {
         "name":"Murloc Tidehunter",

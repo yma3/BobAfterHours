@@ -104,7 +104,7 @@ int main(int argc, char** argv) {
     // std::vector<Minion> test_playerMins {Minion(1000, 1, 1), Minion(10000, 1, 1), Minion(1001, 2, 2), Minion(1002, 1, 2)};
     // std::vector<Minion> test_enemyMins {Minion(2000, 2, 2, 0), Minion(1016, 2, 2, 0)}; 
 
-    std::vector<Minion> test_playerMins {Minion(1001, 1, 2), Minion(1001, 1, 2), Minion(1000, 10, 1)};
+    std::vector<Minion> test_playerMins {Minion(1010, 2, 1), Minion(1001, 1, 2), Minion(1000, 1, 1)};
     std::vector<Minion> test_enemyMins {Minion(1016, 2, 2, 0)}; 
 
 
@@ -122,6 +122,8 @@ int main(int argc, char** argv) {
 
 
     std::cout << "=== SIMMING ===" << std::endl;
+
+    if (verbosity) {testBoard.printBoard();}
 
     for (int i = 0; i < EPS; i++) {
         if(testBoard.isVerbose) {std::cout << ">>>> EP: "<< i << " <<<<" << std::endl;} 

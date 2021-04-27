@@ -21,6 +21,7 @@ Minion::Minion(int type, int hp, int atk) {
 
     isDivine = false;
     isPoison = false;
+    isTaunt = false;
     isDeathrattle = false;
     isReborn = false;
     attacked = false;
@@ -36,6 +37,7 @@ Minion::Minion(int type, int hp, int atk, bool whoseMin) { // Overloaded constru
 
     isDivine = false;
     isPoison = false;
+    isTaunt = false;
     isDeathrattle = false;
     isReborn = false;
     attacked = false;
@@ -69,5 +71,6 @@ void Minion::IncreaseATK(int deltaATK) {SetATK(GetATK()+deltaATK);}
 
 
 std::string Minion::toString() {
-    return "Type: " + std::to_string(minionType) + " ATK: " + std::to_string(attack) + " HP: " + std::to_string(health) + " Tribe: " + tribe;
+    return "Type: " + std::to_string(minionType) + " ATK: " + std::to_string(attack) + " HP: " + std::to_string(health) + " Tribe: " + tribe
+        + " Taunt: " + std::to_string(isTaunt);
 }

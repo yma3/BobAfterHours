@@ -72,11 +72,13 @@ Minion& Board::getDefender(std::vector<Minion> &minionBoard) {
     std::vector<int> valid;
     for (auto it = begin(minionBoard); it != end (minionBoard); ++it) {
         if (it->GetTaunt() && (it->GetHP()>0)) {
+            std::cout << it->toString() << std::endl;
             valid.push_back(it - begin(minionBoard));
         }
     }
     // std::cout << "Checked Taunts" << std::endl;
     if (valid.empty()) {
+        std::cout << "No Taunts Detected" << std::endl;
         for (auto it = begin(minionBoard); it != end (minionBoard); ++it) {
             if (it->GetHP()>0) {
                 valid.push_back(it - begin(minionBoard));
@@ -86,6 +88,7 @@ Minion& Board::getDefender(std::vector<Minion> &minionBoard) {
         return minionBoard.at(valid.at(getDistFromRange(0, valid.size()-1)));
     }
     else {
+        std::cout << "Taunts Detected" << std::endl;
         // Choose from the valid list
         return minionBoard.at(valid.at(getDistFromRange(0, valid.size()-1)));
     }
@@ -209,17 +212,14 @@ void Board::doDeathrattle(Minion &minion, int idx) {
                 (affectedBoard->begin() + buffIdx)->IncreaseATK(minion.GetATK());
             }
             break;
-        case 1016: // Acolyte of C'Thun (2/2 Reborn)
+        case 1010: // Micro Mummy
             {
-                if (isVerbose) {std::cout << "DEATHRATTLE: Acolyte of C'Thun" << std::endl;}
-                Minion rebornMinion = Minion(10016, 1, 2); // 10094 is a token of the minion-type 1004
+                if (isVerbose) {std::cout << "DEATHRATTLE: Micro Mummy" << std::endl;}
+                Minion rebornMinion = Minion(10010, 1, 1); // 10010 is a token of the minion-type 1010
                 (*affectedBoard).insert((*affectedBoard).begin()+idx+1, rebornMinion);
-                // for (auto it = begin (*affectedBoard); it != end (*affectedBoard); ++it) {
-                //     std::cout << (*it).toString() << std::endl;
-                // }
             }
             break;
-        case 1015: // Scallywag
+        case 1015: // Scallywag <- NEEDS FIX
             {
                 Minion skyPirate_Token = Minion(10015, 1, 1);
                 affectedBoard->insert(affectedBoard->begin()+idx+1, skyPirate_Token);
@@ -237,6 +237,17 @@ void Board::doDeathrattle(Minion &minion, int idx) {
                     fightHistory.push_back(std::make_pair(*(affectedBoard->begin()+idx+1), tokdef));
                     // checkDeaths();
                 }
+            }
+            break;
+        case 1016: // Acolyte of C'Thun (2/2 Reborn)
+            {
+                if (isVerbose) {std::cout << "DEATHRATTLE: Acolyte of C'Thun" << std::endl;}
+                Minion rebornMinion = Minion(10016, 1, 2); // 10016 is a token of the minion-type 1016
+                rebornMinion.SetTaunt(true);
+                (*affectedBoard).insert((*affectedBoard).begin()+idx+1, rebornMinion);
+                // for (auto it = begin (*affectedBoard); it != end (*affectedBoard); ++it) {
+                //     std::cout << (*it).toString() << std::endl;
+                // }
             }
             break;
         case 2000: // Spawn of N'Zoth (2/2, +2/+2)
