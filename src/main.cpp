@@ -58,6 +58,58 @@ void updateMinionData(std::vector<Minion> &minionList, json &j) {
 
 
 
+std::vector<Minion> extractMinionVectFromJson(json &j, bool isPlayerBoard) {
+    std::vector<Minion> board;
+    std::string boardKey =  isPlayerBoard ? "Allied" : "Enemy";
+    // std::cout << boardKey << std::endl;
+    for (auto it = j[boardKey].begin(); it != j[boardKey].end(); ++it) {
+        std::cout << *it << std::endl;
+        Minion m = Minion((*it).at("id"), (*it).at("hp"), (*it).at("atk"), isPlayerBoard);
+        m.SetTaunt((*it).at("isTaunt") == 1);
+        m.SetDivine((*it).at("isDivine") == 1);
+        m.SetPoison((*it).at("isPoison") == 1);
+        m.SetDeathrattle((*it).at("isDeathrattle") == 1);
+        m.SetReborn((*it).at("isReborn") == 1);
+
+        board.push_back(m);
+        // std::cout << m.toString() << std::endl;
+    }
+
+    return board;
+}
+
+void extractJsonToMinionVects(std::vector<Minion> &playerBoard, std::vector<Minion> &enemyBoard, std::string filename_json) {
+    std::ifstream i(filename_json);
+    json inputBoards;
+    i >> inputBoards;
+
+    playerBoard = extractMinionVectFromJson(inputBoards, 1);
+    enemyBoard = extractMinionVectFromJson(inputBoards, 0);
+}
+
+void simBoards(Board &board, bool verbosity, int eps, std::vector<Minion>&init_ally, std::vector<Minion>&init_enemy, std::vector<int>&scoreBoard) {
+    std::cout << "=== SIMMING ===" << std::endl;
+
+    if (verbosity) {board.printBoard();}
+
+    for (int i = 0; i < eps; i++) {
+        if(board.isVerbose) {std::cout << ">>>> EP: "<< i << " <<<<" << std::endl;} 
+        board.setPlayerBoard(init_ally);
+        board.setEnemyBoard(init_enemy);
+
+        board.singleSim(scoreBoard);
+    }
+
+    // Print Scoreboard
+    std::cout << "Ties: " << scoreBoard[0] << " Losses: " << scoreBoard[1] << " Wins: " << scoreBoard[2] << std::endl;
+    
+    int BOUNDS = 40;
+    for(int i = (0+BOUNDS); i < (board.damageBreakdown.size()-BOUNDS); i++) {
+        std::cout << "Damage: " << (i-48) << " = " << board.damageBreakdown[i] << std::endl;
+    }
+}
+
+
 
 
 
@@ -108,13 +160,19 @@ int main(int argc, char** argv) {
     std::vector<Minion> test_playerMins {Minion(2000, 2, 2), Minion(1012, 3, 5), Minion(1013, 3, 2), Minion(1011, 1, 2), Minion(10011, 1, 1)};
     std::vector<Minion> test_enemyMins {Minion(2000, 2, 2, 0), Minion(1000, 1, 1, 0), Minion(1008, 2, 2, 0), Minion(1016, 2, 2, 0), Minion(1016, 2, 2, 0)}; 
 
+    std::vector<Minion> input_playerBoard;
+    std::vector<Minion> input_enemyBoard;
+
+    extractJsonToMinionVects(input_playerBoard, input_enemyBoard, "sim_test.json");
 
     updateMinionData(test_playerMins, minionNameList);
     updateMinionData(test_enemyMins, minionNameList);
 
     Board testBoard(test_playerMins, test_enemyMins);
-    testBoard.isVerbose = verbosity; // SETTING THE VERBOSITY
+    Board inputBoard(input_playerBoard, input_enemyBoard);
 
+    testBoard.isVerbose = verbosity; // SETTING THE VERBOSITY
+    inputBoard.isVerbose = verbosity;
     // // testBoard.setPlayerBoard(test_playerMins);
     // // testBoard.setEnemyBoard(test_enemyMins);
     // testBoard.printBoard();
@@ -122,28 +180,32 @@ int main(int argc, char** argv) {
     // testBoard.doTurn();
 
 
-    std::cout << "=== SIMMING ===" << std::endl;
+    // std::cout << "=== SIMMING ===" << std::endl;
 
-    if (verbosity) {testBoard.printBoard();}
+    // if (verbosity) {testBoard.printBoard();}
 
-    for (int i = 0; i < EPS; i++) {
-        if(testBoard.isVerbose) {std::cout << ">>>> EP: "<< i << " <<<<" << std::endl;} 
-        testBoard.setPlayerBoard(test_playerMins);
-        testBoard.setEnemyBoard(test_enemyMins);
+    // for (int i = 0; i < EPS; i++) {
+    //     if(testBoard.isVerbose) {std::cout << ">>>> EP: "<< i << " <<<<" << std::endl;} 
+    //     testBoard.setPlayerBoard(test_playerMins);
+    //     testBoard.setEnemyBoard(test_enemyMins);
 
-        testBoard.singleSim(scoreBoard);
-    }
+    //     testBoard.singleSim(scoreBoard);
+    // }
+
 
 
 
     // Print Scoreboard
-    std::cout << "Ties: " << scoreBoard[0] << " Losses: " << scoreBoard[1] << " Wins: " << scoreBoard[2] << std::endl;
+    // std::cout << "Ties: " << scoreBoard[0] << " Losses: " << scoreBoard[1] << " Wins: " << scoreBoard[2] << std::endl;
     
-    int BOUNDS = 40;
-    for(int i = (0+BOUNDS); i < (testBoard.damageBreakdown.size()-BOUNDS); i++) {
-        std::cout << "Damage: " << (i-48) << " = " << testBoard.damageBreakdown[i] << std::endl;
-    }
+    // int BOUNDS = 40;
+    // for(int i = (0+BOUNDS); i < (testBoard.damageBreakdown.size()-BOUNDS); i++) {
+    //     std::cout << "Damage: " << (i-48) << " = " << testBoard.damageBreakdown[i] << std::endl;
+    // }
 
+
+    // simBoards(testBoard, verbosity, EPS, test_playerMins, test_enemyMins, scoreBoard);
+    simBoards(inputBoard, verbosity, EPS, input_playerBoard, input_enemyBoard, scoreBoard);
 
     
 

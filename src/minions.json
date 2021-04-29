@@ -79,7 +79,7 @@
         "tier":1,
         "isDivine": 0,
         "isPoison": 0,
-        "isTaunt": 0,
+        "isTaunt": 1,
         "isReborn": 0,
         "isDeathrattle":0
     },
