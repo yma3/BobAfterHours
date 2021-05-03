@@ -63,7 +63,7 @@ std::vector<Minion> extractMinionVectFromJson(json &j, bool isPlayerBoard) {
     std::string boardKey =  isPlayerBoard ? "Allied" : "Enemy";
     // std::cout << boardKey << std::endl;
     for (auto it = j[boardKey].begin(); it != j[boardKey].end(); ++it) {
-        std::cout << *it << std::endl;
+        // std::cout << *it << std::endl;
         Minion m = Minion((*it).at("id"), (*it).at("hp"), (*it).at("atk"), isPlayerBoard);
         m.SetTaunt((*it).at("isTaunt") == 1);
         m.SetDivine((*it).at("isDivine") == 1);
@@ -117,12 +117,17 @@ int main(int argc, char** argv) {
 
     int EPS;
     bool verbosity = false; // SET VERBOSITY
+    std::string loadMinionsFname = "sim_test.json";
 
     if (argc == 2) {
         EPS = std::stoi(argv[1]);
     } else if (argc==3) {
         EPS = std::stoi(argv[1]);
         verbosity = (std::stoi(argv[2])==1);
+    } else if (argc==4){
+        EPS = std::stoi(argv[1]);
+        verbosity = (std::stoi(argv[2])==1);
+        loadMinionsFname = argv[3];
     } else {
         EPS = 1; // Set default episodes for simulation
     }
@@ -163,7 +168,7 @@ int main(int argc, char** argv) {
     std::vector<Minion> input_playerBoard;
     std::vector<Minion> input_enemyBoard;
 
-    extractJsonToMinionVects(input_playerBoard, input_enemyBoard, "sim_test.json");
+    extractJsonToMinionVects(input_playerBoard, input_enemyBoard, loadMinionsFname);
 
     updateMinionData(test_playerMins, minionNameList);
     updateMinionData(test_enemyMins, minionNameList);
