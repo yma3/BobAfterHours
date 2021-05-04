@@ -13,6 +13,10 @@ class StatTracker {
         int losses;
         int wins_givenFirst;
         int losses_givenFirst;
+
+        int playerSumOfTiers;
+        int enemySumOfTiers;
+
         std::vector<int> damageBreakdown;
 
         std::string toString();

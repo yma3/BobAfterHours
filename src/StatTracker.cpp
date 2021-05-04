@@ -6,6 +6,8 @@ StatTracker::StatTracker() {
     ties = 0;
     wins_givenFirst = 0;
     losses_givenFirst = 0;
+    playerSumOfTiers = 0;
+    enemySumOfTiers = 0;
     for(int i = 0; i < 97; i++) {
         damageBreakdown.push_back(0);
     }

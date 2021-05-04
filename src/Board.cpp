@@ -339,6 +339,14 @@ void Board::singleSim(StatTracker &tracker) {
     int turnCounter = 1;
     setAttacker();
     int whoWentFirst = getWhoseTurn();
+
+    for (auto it = begin(playerBoard); it != end(playerBoard); ++it) {
+        tracker.playerSumOfTiers += it->tier;
+    }
+    for (auto it = begin(enemyBoard); it != end(enemyBoard); ++it) {
+        tracker.enemySumOfTiers += it->tier;
+    }
+
     while(!checkWin()) {
         // std::cout << "====== Turn: " << turnCounter << ", Attacker: " << (getWhoseTurn() ? "Player" : "Enemy") << " ======" << std::endl;
         doTurn();
