@@ -335,9 +335,10 @@ void Board::doTurn() {
     isPlayerTurn = !isPlayerTurn;
 }
 
-void Board::singleSim(std::vector<int> &scoreBoard) {
+void Board::singleSim(StatTracker &tracker) {
     int turnCounter = 1;
     setAttacker();
+    int whoWentFirst = getWhoseTurn();
     while(!checkWin()) {
         // std::cout << "====== Turn: " << turnCounter << ", Attacker: " << (getWhoseTurn() ? "Player" : "Enemy") << " ======" << std::endl;
         doTurn();
@@ -345,24 +346,29 @@ void Board::singleSim(std::vector<int> &scoreBoard) {
     }
 
     if (playerBoard.empty() && enemyBoard.empty()) {
-        scoreBoard[0] += 1;
+        tracker.ties += 1;
+        tracker.damageBreakdown[0+48] += 1;
         damageBreakdown[0+48] += 1;
         // std::cout << "It's a tie!" << std::endl;
     } else if (playerBoard.empty() && !enemyBoard.empty()) {
         // std::cout << "Player Loses!" << std::endl;
-        scoreBoard[1] += 1;
+        tracker.losses += 1;
+        if (whoWentFirst) {tracker.losses_givenFirst += 1;}
         int totaldamage = 0;
         for (auto it = begin(enemyBoard); it != end(enemyBoard); ++it) {
             totaldamage += it->tier;
         }
+        tracker.damageBreakdown[48-totaldamage] += 1;
         damageBreakdown[48-totaldamage] += 1;
     } else { // (!board.playerBoard.empty() && board.enemyBoard.empty()) {
         // std::cout << "Player Wins!" << std::endl;
-        scoreBoard[2] += 1;
+        tracker.wins += 1;
+        if (whoWentFirst) {tracker.wins_givenFirst += 1;}
         int totaldamage = 0;
         for (auto it = begin(playerBoard); it != end(playerBoard); ++it) {
             totaldamage += it->tier;
         }
+        tracker.damageBreakdown[48+totaldamage] += 1;
         damageBreakdown[48+totaldamage] += 1;
     }
 

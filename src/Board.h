@@ -4,6 +4,7 @@
 #include <vector>
 #include <random>
 #include "Minion.h"
+#include "StatTracker.h"
 
 class Board{
     public:
@@ -26,7 +27,7 @@ class Board{
 
         bool checkWin();
 
-        void singleSim(std::vector<int> &scoreBoard);
+        void singleSim(StatTracker &tracker);
 
         bool getWhoseTurn();
 

@@ -9,6 +9,7 @@ using json = nlohmann::json;
 
 #include "Minion.h"
 #include "Board.h"
+#include "StatTracker.h"
 
 std::vector<std::tuple<std::string, int, int>> MinionList = {
     std::make_tuple("Alley Cat", 1, 1),
@@ -87,7 +88,7 @@ void extractJsonToMinionVects(std::vector<Minion> &playerBoard, std::vector<Mini
     enemyBoard = extractMinionVectFromJson(inputBoards, 0);
 }
 
-void simBoards(Board &board, bool verbosity, int eps, std::vector<Minion>&init_ally, std::vector<Minion>&init_enemy, std::vector<int>&scoreBoard) {
+void simBoards(Board &board, bool verbosity, int eps, std::vector<Minion>&init_ally, std::vector<Minion>&init_enemy, StatTracker &tracker) {
     std::cout << "=== SIMMING ===" << std::endl;
 
     if (verbosity) {board.printBoard();}
@@ -97,11 +98,11 @@ void simBoards(Board &board, bool verbosity, int eps, std::vector<Minion>&init_a
         board.setPlayerBoard(init_ally);
         board.setEnemyBoard(init_enemy);
 
-        board.singleSim(scoreBoard);
+        board.singleSim(tracker);
     }
 
     // Print Scoreboard
-    std::cout << "Ties: " << scoreBoard[0] << " Losses: " << scoreBoard[1] << " Wins: " << scoreBoard[2] << std::endl;
+    std::cout << "Ties: " << tracker.ties << " Losses: " << tracker.losses << " Wins: " << tracker.wins << std::endl;
     
     int BOUNDS = 40;
     for(int i = (0+BOUNDS); i < (board.damageBreakdown.size()-BOUNDS); i++) {
@@ -149,6 +150,7 @@ int main(int argc, char** argv) {
 
 
     std::vector<int> scoreBoard = {0, 0, 0}; // [0] os tie, [1] is loss, [2] is win
+    StatTracker tracker;
 
     // Minion testMinion(0, 2, 4);
     // std::cout << "Hello World!" << std::endl;
@@ -210,7 +212,7 @@ int main(int argc, char** argv) {
 
 
     // simBoards(testBoard, verbosity, EPS, test_playerMins, test_enemyMins, scoreBoard);
-    simBoards(inputBoard, verbosity, EPS, input_playerBoard, input_enemyBoard, scoreBoard);
+    simBoards(inputBoard, verbosity, EPS, input_playerBoard, input_enemyBoard, tracker);
 
     
 
