@@ -12,6 +12,7 @@ class SqlHandler {
         bool const dbExists(const std::string& dbname);
         void createDataTable();
         int insertDataTable();
+        int insertDataTable(std::string boards, std::string wl, std::string dmg, int eps);
         void closedb();
 
     private:

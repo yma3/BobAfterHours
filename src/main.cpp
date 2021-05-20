@@ -10,6 +10,7 @@ using json = nlohmann::json;
 #include "Minion.h"
 #include "Board.h"
 #include "StatTracker.h"
+#include "SqlHandler.h"
 
 std::vector<std::tuple<std::string, int, int>> MinionList = {
     std::make_tuple("Alley Cat", 1, 1),
@@ -110,6 +111,16 @@ void simBoards(Board &board, bool verbosity, int eps, std::vector<Minion>&init_a
     }
 }
 
+void saveIntoDB(std::string dbfname, std::string jsonfname, std::string wl, std::string dmg, int eps) {
+    std::ifstream i(jsonfname);
+    json inputBoards;
+    i >> inputBoards;
+    std::string s = inputBoards.dump();
+    SqlHandler sqlhand = SqlHandler(dbfname);
+    sqlhand.insertDataTable(s, wl, dmg, eps);
+
+}
+
 
 
 
@@ -119,6 +130,7 @@ int main(int argc, char** argv) {
     int EPS;
     bool verbosity = false; // SET VERBOSITY
     std::string loadMinionsFname = "sim_test.json";
+    std::string dbFname = "test.db";
 
     if (argc == 2) {
         EPS = std::stoi(argv[1]);
@@ -129,9 +141,15 @@ int main(int argc, char** argv) {
         EPS = std::stoi(argv[1]);
         verbosity = (std::stoi(argv[2])==1);
         loadMinionsFname = argv[3];
+    } else if (argc==5) {
+        EPS = std::stoi(argv[1]);
+        verbosity = (std::stoi(argv[2])==1);
+        loadMinionsFname = argv[3];
+        dbFname = argv[4];
     } else {
         EPS = 1; // Set default episodes for simulation
     }
+
     
     std::cout << "Eps: " << EPS << " Verbose: " << verbosity << std::endl;
 
@@ -213,7 +231,7 @@ int main(int argc, char** argv) {
 
     // simBoards(testBoard, verbosity, EPS, test_playerMins, test_enemyMins, scoreBoard);
     simBoards(inputBoard, verbosity, EPS, input_playerBoard, input_enemyBoard, tracker);
-
+    saveIntoDB(dbFname, loadMinionsFname, tracker.toString(), tracker.damageToString(), EPS);
     
 
     

@@ -35,3 +35,5 @@
 *.py
 /include/
 .vscode/
+*.db
+build.sh

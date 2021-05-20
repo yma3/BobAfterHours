@@ -3,6 +3,8 @@
 
 #include <vector>
 #include <string>
+#include <sstream>
+#include <iterator>
 
 class StatTracker {
     public:
@@ -20,6 +22,7 @@ class StatTracker {
         std::vector<int> damageBreakdown;
 
         std::string toString();
+        std::string damageToString();
 };
 
 
