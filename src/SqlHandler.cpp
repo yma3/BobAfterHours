@@ -38,7 +38,7 @@ void SqlHandler::createDataTable() {
                 "sumRankEB INTEGER DEFAULT -1 "\
         ");";
     rc = sqlite3_exec(db, sql, callback, this, &zErrMsg);
-    std::cout << "Table Created" << std::endl;
+    // std::cout << "Table Created" << std::endl;
 
 }
 
@@ -73,7 +73,7 @@ int SqlHandler::insertDataTable() {
     // std::strcpy(buffer,sql.c_str());
 
     // rc = sqlite3_exec(db, sql, callback, this, &zErrMsg);
-    std::cout << "Test Data Inserted" << std::endl;
+    // std::cout << "Test Data Inserted" << std::endl;
 
     return 0;
 }

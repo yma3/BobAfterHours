@@ -7,6 +7,7 @@ StatTracker::StatTracker() {
     ties = 0;
     wins_givenFirst = 0;
     losses_givenFirst = 0;
+    ties_givenFirst = 0;
     playerSumOfTiers = 0;
     enemySumOfTiers = 0;
     for(int i = 0; i < 97; i++) {
@@ -17,7 +18,7 @@ StatTracker::StatTracker() {
 std::string StatTracker::toString() {
     return "Wins:"+std::to_string(wins)+",losses:"+std::to_string(losses)+",ties:"+
         std::to_string(ties)+",P(W|F):"+std::to_string(wins_givenFirst)+
-        ",P(L|F):"+std::to_string(losses_givenFirst);
+        ",P(L|F):"+std::to_string(losses_givenFirst)+",P(T|F):"+std::to_string(ties_givenFirst);
 }
 
 std::string StatTracker::damageToString() {

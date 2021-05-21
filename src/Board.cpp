@@ -355,6 +355,7 @@ void Board::singleSim(StatTracker &tracker) {
 
     if (playerBoard.empty() && enemyBoard.empty()) {
         tracker.ties += 1;
+        if (whoWentFirst) {tracker.ties_givenFirst += 1;}
         tracker.damageBreakdown[0+48] += 1;
         damageBreakdown[0+48] += 1;
         // std::cout << "It's a tie!" << std::endl;

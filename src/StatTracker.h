@@ -15,6 +15,7 @@ class StatTracker {
         int losses;
         int wins_givenFirst;
         int losses_givenFirst;
+        int ties_givenFirst;
 
         int playerSumOfTiers;
         int enemySumOfTiers;

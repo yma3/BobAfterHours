@@ -232,6 +232,7 @@ int main(int argc, char** argv) {
     // simBoards(testBoard, verbosity, EPS, test_playerMins, test_enemyMins, scoreBoard);
     simBoards(inputBoard, verbosity, EPS, input_playerBoard, input_enemyBoard, tracker);
     saveIntoDB(dbFname, loadMinionsFname, tracker.toString(), tracker.damageToString(), EPS);
+    std::cout << "$" << EPS << "$" << tracker.toString() << "$" << tracker.damageToString() << std::endl;
     
 
     
