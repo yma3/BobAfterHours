@@ -10,7 +10,7 @@ using json = nlohmann::json;
 #include "Minion.h"
 #include "Board.h"
 #include "StatTracker.h"
-#include "SqlHandler.h"
+// #include "SqlHandler.h"
 
 std::vector<std::tuple<std::string, int, int>> MinionList = {
     std::make_tuple("Alley Cat", 1, 1),
@@ -111,15 +111,15 @@ void simBoards(Board &board, bool verbosity, int eps, std::vector<Minion>&init_a
     }
 }
 
-void saveIntoDB(std::string dbfname, std::string jsonfname, std::string wl, std::string dmg, int eps) {
-    std::ifstream i(jsonfname);
-    json inputBoards;
-    i >> inputBoards;
-    std::string s = inputBoards.dump();
-    SqlHandler sqlhand = SqlHandler(dbfname);
-    sqlhand.insertDataTable(s, wl, dmg, eps);
+// void saveIntoDB(std::string dbfname, std::string jsonfname, std::string wl, std::string dmg, int eps) {
+//     std::ifstream i(jsonfname);
+//     json inputBoards;
+//     i >> inputBoards;
+//     std::string s = inputBoards.dump();
+//     SqlHandler sqlhand = SqlHandler(dbfname);
+//     sqlhand.insertDataTable(s, wl, dmg, eps);
 
-}
+// }
 
 
 
@@ -231,7 +231,7 @@ int main(int argc, char** argv) {
 
     // simBoards(testBoard, verbosity, EPS, test_playerMins, test_enemyMins, scoreBoard);
     simBoards(inputBoard, verbosity, EPS, input_playerBoard, input_enemyBoard, tracker);
-    saveIntoDB(dbFname, loadMinionsFname, tracker.toString(), tracker.damageToString(), EPS);
+    // saveIntoDB(dbFname, loadMinionsFname, tracker.toString(), tracker.damageToString(), EPS);
     std::cout << "$" << EPS << "$" << tracker.toString() << "$" << tracker.damageToString() << std::endl;
     
 
